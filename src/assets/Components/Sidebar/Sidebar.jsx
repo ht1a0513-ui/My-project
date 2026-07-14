@@ -1,16 +1,27 @@
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ items = [], activePage, onSelect }) {
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
+      <div className="sidebar__brand">
+        <h3>Quick Links</h3>
+        <p>Navigate the system</p>
+      </div>
+
       <ul>
-        <li>Dashboard</li>
-        <li>Events</li>
-        <li>Register</li>
-        <li>Participants</li>
-        <li>Reports</li>
+        {items.map((item) => (
+          <li key={item.key}>
+            <button
+              type="button"
+              className={`sidebar__link ${activePage === item.key ? "active" : ""}`}
+              onClick={() => onSelect(item.key)}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
       </ul>
-    </div>
+    </aside>
   );
 }
 

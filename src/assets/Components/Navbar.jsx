@@ -1,9 +1,12 @@
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ title = "🎉 Event Registration System", subtitle = "Simple and modern event management" }) {
   return (
     <nav className="navbar">
-      <h2>🎉 Event Registration System</h2>
+      <div>
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+      </div>
     </nav>
   );
 }

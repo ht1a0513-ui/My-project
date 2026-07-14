@@ -1,0 +1,32 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-nav {
+  display: flex;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #0f172a;
+  flex-wrap: wrap;
+}
+
+.top-nav__link {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.top-nav__link.active {
+  background: #2563eb;
+  color: white;
+}
+
+.main-layout {
+  flex: 1;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fbff, #eef4ff);
+}

@@ -1,0 +1,25 @@
+.section-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.section-card__header {
+  margin-bottom: 14px;
+}
+
+.section-card__header h2 {
+  color: #102a43;
+  margin-bottom: 4px;
+}
+
+.section-card__header p {
+  color: #627d98;
+}
+
+.section-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

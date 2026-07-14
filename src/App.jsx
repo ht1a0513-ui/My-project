@@ -1,39 +1,58 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-import Navbar from "./assets/Components/Navbar";
-import Sidebar from "./assets/Components/Sidebar/Sidebar";
-import Footer from "./assets/Components/Footer/Footer";
-
-import Dashboard from "./assets/Pages/Dashboard/Dashboard";
-
-// These pages are not present in the current project structure.
-// import Events from "./assets/Pages/Events/Events";
-// import Register from "./assets/Pages/Register/Register";
-// import Participants from "./assets/Pages/Participants/Participants";
-// import Reports from "./assets/Pages/Reports/Reports";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import DashboardOverview from "./pages/DashboardOverview";
+import DashboardProfile from "./pages/DashboardProfile";
+import DashboardSettings from "./pages/DashboardSettings";
+import EventsPage from "./pages/EventsPage";
+import EventDetailsPage from "./pages/EventDetailsPage";
+import Details from "./pages/Details";
+import NotFound from "./pages/NotFound";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return JSON.parse(localStorage.getItem("event-auth") || "false");
+  });
+
+  useEffect(() => {
+    localStorage.setItem("event-auth", JSON.stringify(isAuthenticated));
+  }, [isAuthenticated]);
+
+  const ProtectedRoute = ({ children }) => (isAuthenticated ? children : <Navigate to="/login" replace />);
+
   return (
-    <div className="app">
-      <Navbar />
-
-      <div className="main-container">
-        <Sidebar />
-
-        <div className="content">
-          <Dashboard />
-
-          {/* Uncomment one page at a time while developing */}
-
-          {/* <Events /> */}
-          {/* <Register /> */}
-          {/* <Participants /> */}
-          {/* <Reports /> */}
-        </div>
-      </div>
-
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<LoginPage onLogin={() => setIsAuthenticated(true)} />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard onLogout={() => setIsAuthenticated(false)} />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="overview" element={<DashboardOverview />} />
+            <Route path="profile" element={<DashboardProfile />} />
+            <Route path="settings" element={<DashboardSettings />} />
+          </Route>
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/details/:id" element={<EventDetailsPage />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

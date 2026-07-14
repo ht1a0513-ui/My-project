@@ -1,0 +1,12 @@
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.loading-state {
+  text-align: center;
+  font-weight: 700;
+  color: #2563eb;
+  padding: 20px;
+}
