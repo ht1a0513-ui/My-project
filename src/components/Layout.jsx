@@ -11,21 +11,31 @@ const navItems = [
   { to: "/login", label: "Login" },
 ];
 
-function Layout() {
+function Layout({ theme, onThemeChange }) {
   return (
     <div className="app-shell">
       <Navbar title="🎉 Event Registration System" subtitle="Multi-page event management portal" />
 
       <div className="top-nav">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) => (isActive ? "top-nav__link active" : "top-nav__link")}
-          >
-            {item.label}
-          </NavLink>
-        ))}
+        <div className="top-nav__links">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) => (isActive ? "top-nav__link active" : "top-nav__link")}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={() => onThemeChange(theme === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        </button>
       </div>
 
       <main className="main-layout">

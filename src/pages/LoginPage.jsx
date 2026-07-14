@@ -34,7 +34,7 @@ function LoginPage({ onLogin }) {
 
     if (formData.username === "admin" && formData.password === "Admin@123") {
       setStatus("Login successful. Redirecting...");
-      onLogin();
+      onLogin({ username: formData.username, loginTime: new Date().toISOString() });
       setTimeout(() => navigate("/dashboard/overview"), 600);
     } else {
       setStatus("Invalid credentials. Try admin / Admin@123");

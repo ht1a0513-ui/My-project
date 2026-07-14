@@ -3,6 +3,8 @@
   border-radius: 999px;
   font-weight: 700;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .action-btn.primary {
@@ -11,6 +13,10 @@
 
 .action-btn.secondary {
   background: #0f766e;
+}
+
+.action-btn.danger {
+  background: #dc2626;
 }
 
 .action-btn:hover {
