@@ -1,0 +1,14 @@
+node_modules/
+**/node_modules/
+.vite/
+**/.vite/
+dist/
+**/dist/
+build/
+**/build/
+.env
+.env.*
+*.log
+.DS_Store
+coverage/
+**/coverage/
