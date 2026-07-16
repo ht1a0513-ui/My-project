@@ -1,0 +1,78 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #0f172a;
+  flex-wrap: wrap;
+}
+
+.top-nav__links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.top-nav__link {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.top-nav__link.active {
+  background: #2563eb;
+  color: white;
+}
+
+.theme-toggle {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.main-layout {
+  flex: 1;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fbff, #eef4ff);
+}
+
+.theme-dark .main-layout,
+.theme-dark body,
+.theme-dark .app-shell {
+  background: #020617;
+  color: #e2e8f0;
+}
+
+.theme-dark .section-card,
+.theme-dark .sidebar-panel,
+.theme-dark .event-card,
+.theme-dark .navbar {
+  background: #111827;
+  color: #f8fafc;
+}
+
+.theme-dark .page-header h1,
+.theme-dark .section-card__header h2,
+.theme-dark .event-card h3 {
+  color: #f8fafc;
+}
+
+.theme-dark .page-header p,
+.theme-dark .section-card__header p,
+.theme-dark .event-meta,
+.theme-dark .event-card p {
+  color: #cbd5e1;
+}

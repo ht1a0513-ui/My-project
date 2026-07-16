@@ -1,0 +1,21 @@
+.event-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.event-table th,
+.event-table td {
+    border: 1px solid #dbe3f0;
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.event-table th {
+    background: #2563eb;
+    color: white;
+}
+
+.event-table tr:nth-child(even) {
+    background: #f8fbff;
+}
