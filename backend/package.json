@@ -1,0 +1,22 @@
+{
+  "name": "event-registration-backend",
+  "version": "1.0.0",
+  "description": "REST API backend for the event registration system",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "rest-api",
+    "event-registration"
+  ],
+  "author": "GitHub Copilot",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
