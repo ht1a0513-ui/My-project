@@ -1,126 +1,37 @@
-import { participants } from '../data/participants.js';
+import Participant from "../models/Participant.js";
 
-const writeResponse = (res, statusCode, payload) => {
-  res.status(statusCode).json(payload);
+export const getParticipants = async (req, res) => {
+  const participants = await Participant.find();
+
+  res.json(participants);
 };
 
-export const getAllParticipants = (req, res) => {
-  writeResponse(res, 200, {
-    success: true,
-    count: participants.length,
-    data: participants,
-  });
+export const getParticipant = async (req, res) => {
+  const participant = await Participant.findById(req.params.id);
+
+  res.json(participant);
 };
 
-export const getParticipantById = (req, res) => {
-  const participantId = Number(req.params.id);
-  const participant = participants.find((item) => item.id === participantId);
+export const createParticipant = async (req, res) => {
+  const participant = await Participant.create(req.body);
 
-  if (!participant) {
-    return writeResponse(res, 404, {
-      success: false,
-      message: 'Participant not found for the given ID',
-    });
-  }
-
-  return writeResponse(res, 200, {
-    success: true,
-    data: participant,
-  });
+  res.status(201).json(participant);
 };
 
-export const createParticipant = (req, res) => {
-  const newParticipant = {
-    id: participants.length ? participants[participants.length - 1].id + 1 : 1,
-    ...req.body,
-  };
+export const updateParticipant = async (req, res) => {
+  const participant = await Participant.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
 
-  participants.push(newParticipant);
-
-  return writeResponse(res, 201, {
-    success: true,
-    message: 'Participant created successfully',
-    data: newParticipant,
-  });
+  res.json(participant);
 };
 
-export const updateParticipant = (req, res) => {
-  const participantId = Number(req.params.id);
-  const participantIndex = participants.findIndex((item) => item.id === participantId);
+export const deleteParticipant = async (req, res) => {
+  await Participant.findByIdAndDelete(req.params.id);
 
-  if (participantIndex === -1) {
-    return writeResponse(res, 404, {
-      success: false,
-      message: 'Participant not found for the given ID',
-    });
-  }
-
-  participants[participantIndex] = {
-    ...participants[participantIndex],
-    ...req.body,
-    id: participantId,
-  };
-
-  return writeResponse(res, 200, {
-    success: true,
-    message: 'Participant updated successfully',
-    data: participants[participantIndex],
-  });
-};
-
-export const deleteParticipant = (req, res) => {
-  const participantId = Number(req.params.id);
-  const participantIndex = participants.findIndex((item) => item.id === participantId);
-
-  if (participantIndex === -1) {
-    return writeResponse(res, 404, {
-      success: false,
-      message: 'Participant not found for the given ID',
-    });
-  }
-
-  const [removedParticipant] = participants.splice(participantIndex, 1);
-
-  return writeResponse(res, 200, {
-    success: true,
-    message: 'Participant deleted successfully',
-    data: removedParticipant,
-  });
-};
-
-export const searchParticipants = (req, res) => {
-  const { name, eventName, status, sort } = req.query;
-  let filteredParticipants = [...participants];
-
-  if (name) {
-    filteredParticipants = filteredParticipants.filter((item) =>
-      item.name.toLowerCase().includes(String(name).toLowerCase())
-    );
-  }
-
-  if (eventName) {
-    filteredParticipants = filteredParticipants.filter((item) =>
-      item.eventName.toLowerCase().includes(String(eventName).toLowerCase())
-    );
-  }
-
-  if (status) {
-    filteredParticipants = filteredParticipants.filter((item) =>
-      item.status.toLowerCase() === String(status).toLowerCase()
-    );
-  }
-
-  if (sort === 'asc') {
-    filteredParticipants.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  if (sort === 'desc') {
-    filteredParticipants.sort((a, b) => b.name.localeCompare(a.name));
-  }
-
-  return writeResponse(res, 200, {
-    success: true,
-    count: filteredParticipants.length,
-    data: filteredParticipants,
+  res.json({
+    message: "Participant Deleted",
   });
 };

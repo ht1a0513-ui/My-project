@@ -1,0 +1,43 @@
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #1f2937, #111827);
+    color: white;
+    padding: 20px 12px;
+}
+
+.sidebar__brand {
+    padding: 8px 8px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 12px;
+}
+
+.sidebar__brand h3 {
+    margin-bottom: 4px;
+}
+
+.sidebar__brand p {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar__link {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: white;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.sidebar__link:hover,
+.sidebar__link.active {
+    background: #2563eb;
+}

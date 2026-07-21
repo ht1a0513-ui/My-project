@@ -1,0 +1,35 @@
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+}
+
+.dashboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+}
+
+.dashboard-list li {
+    color: #334155;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid,
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+    }
+}

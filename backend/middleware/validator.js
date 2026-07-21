@@ -1,4 +1,5 @@
 const requiredFields = ['name', 'email', 'phone', 'eventName', 'status'];
+const allowedStatuses = ['confirmed', 'pending', 'cancelled'];
 
 export const validateParticipantPayload = (req, res, next) => {
   const { name, email, phone, eventName, status } = req.body;
@@ -19,7 +20,13 @@ export const validateParticipantPayload = (req, res, next) => {
     });
   }
 
-  if (typeof name !== 'string' || typeof email !== 'string' || typeof phone !== 'string' || typeof eventName !== 'string' || typeof status !== 'string') {
+  if (
+    typeof name !== 'string' ||
+    typeof email !== 'string' ||
+    typeof phone !== 'string' ||
+    typeof eventName !== 'string' ||
+    typeof status !== 'string'
+  ) {
     return res.status(400).json({
       success: false,
       message: 'All fields must be valid strings',
@@ -30,6 +37,13 @@ export const validateParticipantPayload = (req, res, next) => {
     return res.status(400).json({
       success: false,
       message: 'Invalid email format',
+    });
+  }
+
+  if (!allowedStatuses.includes(status.toLowerCase())) {
+    return res.status(400).json({
+      success: false,
+      message: 'Status must be confirmed, pending, or cancelled',
     });
   }
 

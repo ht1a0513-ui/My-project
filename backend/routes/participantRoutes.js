@@ -1,21 +1,23 @@
-import { Router } from 'express';
+import express from "express";
+
 import {
-  getAllParticipants,
-  getParticipantById,
+  getParticipants,
+  getParticipant,
   createParticipant,
   updateParticipant,
   deleteParticipant,
-  searchParticipants,
-} from '../controllers/participantController.js';
-import { validateParticipantPayload } from '../middleware/validator.js';
+} from "../controllers/participantController.js";
 
-const router = Router();
+const router = express.Router();
 
-router.get('/search', searchParticipants);
-router.get('/', getAllParticipants);
-router.get('/:id', getParticipantById);
-router.post('/', validateParticipantPayload, createParticipant);
-router.put('/:id', validateParticipantPayload, updateParticipant);
-router.delete('/:id', deleteParticipant);
+router.get("/", getParticipants);
+
+router.get("/:id", getParticipant);
+
+router.post("/", createParticipant);
+
+router.put("/:id", updateParticipant);
+
+router.delete("/:id", deleteParticipant);
 
 export default router;
